@@ -1,13 +1,12 @@
 import * as JWT from 'jsonwebtoken';
-import { IUser } from '../interfaces/index';
+// import { IUser } from '../interfaces/index';
 
 require('dotenv/config');
 
 const { JWT_SECRET } = process.env || 'jwt_secret';
 
-const createToken = (user: IUser) => {
-  const data = { id: user.id, username: user.username };
-  const token = JWT.sign(data, JWT_SECRET as string);
+const createToken = (email: string) => {
+  const token = JWT.sign(email, JWT_SECRET as string);
   return token;
 };
 
