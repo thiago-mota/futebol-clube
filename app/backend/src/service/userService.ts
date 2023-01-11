@@ -9,12 +9,10 @@ const userLogin = async (email: string, password: string) => {
   }
 
   const checkPass = await bcryptjs.compare(password, findUser.password);
-  if (!checkPass) return { status: 401, message: 'CHECKPASS ---> Incorrect email or password' };
+  if (!checkPass) return { status: 401, message: 'Incorrect email or password' };
 
-  const userToken = token.createToken(email);
-  return userToken;
-
-  return 'deu bom';
+  const createUserToken = token.createToken(email);
+  return createUserToken;
 };
 
 export default { userLogin };
