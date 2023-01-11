@@ -1,15 +1,20 @@
 import { Request, Response } from 'express';
 import userService from '../service/userService';
-// import Token from '../helpers/createToken';
 
 const userLogin = async (request: Request, response: Response) => {
   const { email, password } = request.body;
-  const xablau = await userService.validateUser(email, password);
+  if (!email || !password) {
+    return response
+      .status(400)
+      .json({ message: 'All fields must be filled' });
+  }
 
-  if (xablau) {
+  const result = await userService.userLogin(email, password);
+
+  if (result) {
     return response
       .status(200)
-      .json('Deu bom');
+      .json(result);
   }
 };
 
