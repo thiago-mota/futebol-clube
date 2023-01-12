@@ -1,5 +1,4 @@
 import * as JWT from 'jsonwebtoken';
-// import { IUser } from '../interfaces/index';
 
 require('dotenv/config');
 
