@@ -11,26 +11,37 @@ const { expect } = chai;
 
 describe('Testing /teams endpoint', () => {
   it('Status 200 if querie is successful', async () => {
-    const response = await chai.request(app).get('/teams');
-    // console.log(response);
+    const response = await chai
+      .request(app)
+      .get('/teams');
+
     expect(response.status).to.be.equal(200);
     expect(response.body).to.have.lengthOf(16)
   });
 
   it('Returns all registered teams', async () => {
-    const response = await chai.request(app).get('/teams');
+    const response = await chai
+      .request(app)
+      .get('/teams');
+
     expect(response.body).to.have.lengthOf(16)
   });
 });
 
 describe('Testing /teams/:id endpoint', () => {
   it('Status 200 if querie is successful', async () => {
-    const response = await chai.request(app).get('/teams/:id')
+    const response = await chai
+      .request(app)
+      .get('/teams/:id')
+
     expect(response.status).to.be.equal(200);
   });
 
   it('Returns id and name from a single team by his id', async () => {
-    const response = await chai.request(app).get('/teams/1');
+    const response = await chai
+      .request(app)
+      .get('/teams/1');
+
     expect(response.body).to.have.property('id');
     expect(response.body).to.have.property('teamName');
   });
