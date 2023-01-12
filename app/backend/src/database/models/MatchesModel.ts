@@ -1,7 +1,7 @@
 import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
 
-class Matchs extends Model {
+export default class Matchs extends Model {
   declare id: number;
   declare homeTeam: number;
   declare homeTeamGoals: number;
