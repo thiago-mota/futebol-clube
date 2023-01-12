@@ -11,11 +11,38 @@ const { expect } = chai;
 
 describe('Testing login endpoint', () => {
   it('Status 200 if email and password are valid', async () => {
-    const response = await chai.request(app).post('/login').send({
-      email: 'admin@admin.com',
-      password: 'secret_admin'
-    });
+    const response = await chai
+      .request(app)
+      .post('/login')
+      .send({
+        email: 'admin@admin.com',
+        password: 'secret_admin'
+      });
 
     expect(response.status).to.be.equal(200)
+  });
+
+  it('Status 401 if email is not valid', async () => {
+    const response = await chai
+      .request(app)
+      .post('/login')
+      .send({
+        email: 'xablau@xablau.com',
+        password: 'secret_admin'
+      });
+
+    expect(response.status).to.be.equal(401);
+  });
+
+  it('Status 401 if password is not valid', async () => {
+    const response = await chai
+      .request(app)
+      .post('/login')
+      .send({
+        email: 'admin@admin.com',
+        password: 'xablau'
+      });
+
+    expect(response.status).to.be.equal(401);
   });
 });
