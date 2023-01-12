@@ -68,3 +68,13 @@ describe('Testing login endpoint', () => {
   expect(response.status).to.be.equal(400);
   })
 });
+
+describe('Testing /login/validate endpoint', () => {
+  it('401 if token was not found', async () => {
+    const response = await chai
+      .request(app)
+      .get('/login/validate');
+
+    expect(response.status).to.be.equal(401);
+  });
+});
