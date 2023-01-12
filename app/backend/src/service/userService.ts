@@ -1,5 +1,5 @@
 import * as bcryptjs from 'bcryptjs';
-import token from '../helpers/createToken';
+import createTkn from '../helpers/createToken';
 import Users from '../database/models/UsersModel';
 
 const userLogin = async (email: string, password: string) => {
@@ -11,8 +11,13 @@ const userLogin = async (email: string, password: string) => {
   const checkPass = await bcryptjs.compare(password, findUser.password);
   if (!checkPass) return { status: 401, message: 'Incorrect email or password' };
 
-  const createUserToken = token.createToken(email);
+  const createUserToken = createTkn.createToken(email);
   return { status: 200, message: createUserToken };
 };
 
-export default { userLogin };
+const findUserRole = async (email: string) => {
+  const findUser = await Users.findOne({ where: { email } });
+  return { role: findUser?.role };
+};
+
+export default { userLogin, findUserRole };
