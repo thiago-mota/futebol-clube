@@ -45,4 +45,15 @@ describe('Testing login endpoint', () => {
 
     expect(response.status).to.be.equal(401);
   });
+
+  it('Status 400 if no email is provided', async () => {
+    const response = await chai
+    .request(app)
+    .post('/login')
+    .send({
+      password: 'xablau'
+    });
+
+  expect(response.status).to.be.equal(400);
+  })
 });
