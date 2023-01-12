@@ -56,4 +56,15 @@ describe('Testing login endpoint', () => {
 
   expect(response.status).to.be.equal(400);
   })
+
+  it('Status 400 if no password is provided', async () => {
+    const response = await chai
+    .request(app)
+    .post('/login')
+    .send({
+      email: 'admin@admin.com'
+    });
+
+  expect(response.status).to.be.equal(400);
+  })
 });
