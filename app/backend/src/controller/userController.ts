@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import decodeTkn from '../helpers/createToken';
 import userService from '../service/userService';
 
 const userLogin = async (request: Request, response: Response) => {
@@ -21,4 +22,25 @@ const userLogin = async (request: Request, response: Response) => {
     .json({ message: result.message });
 };
 
-export default userLogin;
+const getUserRole = async (request: Request, response: Response) => {
+  const { authorization: token } = request.headers;
+
+  if (!token) {
+    return response
+      .status(401)
+      .json({ message: 'Token not found' });
+  }
+
+  const userMail = decodeTkn.decodeToken(token);
+  const userRole = await userService.findUserRole(userMail as string);
+
+  console.log(typeof userMail);
+  console.log(typeof userRole);
+  console.log(userRole);
+
+  return response
+    .status(200)
+    .json(userRole);
+};
+
+export { userLogin, getUserRole };
