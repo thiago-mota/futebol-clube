@@ -34,10 +34,6 @@ const getUserRole = async (request: Request, response: Response) => {
   const userMail = decodeTkn.decodeToken(token);
   const userRole = await userService.findUserRole(userMail as string);
 
-  console.log(typeof userMail);
-  console.log(typeof userRole);
-  console.log(userRole);
-
   return response
     .status(200)
     .json(userRole);
