@@ -11,11 +11,14 @@ const userLogin = async (request: Request, response: Response) => {
 
   const result = await userService.userLogin(email, password);
 
-  if (result) {
+  if (result.status === 200) {
     return response
       .status(200)
-      .json(result);
+      .json({ token: result.message });
   }
+  return response
+    .status(401)
+    .json({ message: result.message });
 };
 
 export default userLogin;

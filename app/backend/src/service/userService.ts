@@ -12,7 +12,7 @@ const userLogin = async (email: string, password: string) => {
   if (!checkPass) return { status: 401, message: 'Incorrect email or password' };
 
   const createUserToken = token.createToken(email);
-  return createUserToken;
+  return { status: 200, message: createUserToken };
 };
 
 export default { userLogin };
