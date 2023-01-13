@@ -19,6 +19,21 @@ const getAllMatches = async (request: Request, response: Response) => {
     .json(allMatchs);
 };
 
+const addMatch = async (request: Request, response: Response) => {
+  const { authorization: token } = request.headers;
+  const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = request.body;
+
+  if (!token) {
+    return response
+      .status(401)
+      .json({ message: 'Token not found' });
+  }
+
+  const result = await matchesService.saveMatch(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals);
+
+  return response.json(result);
+};
+
 const xablau = () => 'xablau';
 
-export { getAllMatches, xablau };
+export { getAllMatches, addMatch, xablau };
