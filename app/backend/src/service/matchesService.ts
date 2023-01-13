@@ -30,8 +30,8 @@ const findAllNotInProgress = async () => {
 
 const saveMatch = async (
   homeTeam: string,
-  homeTeamGoals: number,
   awayTeam: string,
+  homeTeamGoals: number,
   awayTeamGoals: number,
 ) => {
   const addMatch = await Matchs.create({
