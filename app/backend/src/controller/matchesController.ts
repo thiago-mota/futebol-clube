@@ -43,4 +43,12 @@ const addMatch = async (request: Request, response: Response) => {
   return response.status(201).json(result);
 };
 
-export { getAllMatches, addMatch };
+const updateMatchProgress = async (request: Request, response: Response) => {
+  const { id } = request.params;
+
+  const result = await matchesService.updateProgress(id);
+
+  if (result) response.status(200).json({ message: 'Finished' });
+};
+
+export { getAllMatches, addMatch, updateMatchProgress };
