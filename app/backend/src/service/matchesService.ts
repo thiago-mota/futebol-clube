@@ -28,4 +28,16 @@ const findAllNotInProgress = async () => {
   return allInProgress;
 };
 
-export default { findAllMatches, findAllInProgress, findAllNotInProgress };
+const saveMatch = async (
+  homeTeam: string,
+  homeTeamGoals: number,
+  awayTeam: string,
+  awayTeamGoals: number,
+) => {
+  const addMatch = await Matchs.create({
+    homeTeam, homeTeamGoals, awayTeam, awayTeamGoals, inProgress: true,
+  });
+  return addMatch;
+};
+
+export default { findAllMatches, findAllInProgress, findAllNotInProgress, saveMatch };
