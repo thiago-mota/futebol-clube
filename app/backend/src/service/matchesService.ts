@@ -45,10 +45,16 @@ const findTeamNameById = async (id: number) => {
   return result?.teamName;
 };
 
+const findTeamById = async (id: number) => {
+  const result = await Teams.findByPk(id);
+  return result?.id;
+};
+
 export default {
   findAllMatches,
   findAllInProgress,
   findAllNotInProgress,
   saveMatch,
   findTeamNameById,
+  findTeamById,
 };
