@@ -40,4 +40,9 @@ const saveMatch = async (
   return addMatch;
 };
 
-export default { findAllMatches, findAllInProgress, findAllNotInProgress, saveMatch };
+const findTeamById = async (id: number) => {
+  const result = await Teams.findByPk(id);
+  return result?.teamName;
+};
+
+export default { findAllMatches, findAllInProgress, findAllNotInProgress, saveMatch, findTeamById };
