@@ -25,8 +25,8 @@ const getAllMatches = async (request: Request, response: Response) => {
 const addMatch = async (request: Request, response: Response) => {
   const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = request.body;
 
-  const homeName = await matchesService.findTeamById(homeTeam);
-  const awayName = await matchesService.findTeamById(awayTeam);
+  const homeName = await matchesService.findTeamNameById(homeTeam);
+  const awayName = await matchesService.findTeamNameById(awayTeam);
 
   if (homeName === awayName) {
     return response
