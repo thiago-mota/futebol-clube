@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import matchesService from '../service/matchesService';
-import decodeTkn from '../helpers/createToken';
+// import decodeTkn from '../helpers/createToken';
 
 const getAllMatches = async (request: Request, response: Response) => {
   const { inProgress } = request.query;
@@ -23,15 +23,7 @@ const getAllMatches = async (request: Request, response: Response) => {
 };
 
 const addMatch = async (request: Request, response: Response) => {
-  const { authorization: token } = request.headers;
   const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = request.body;
-
-  if (!token) return response.status(401).json({ message: 'Token not found' });
-  try {
-    decodeTkn.decodeToken(token);
-  } catch (error) {
-    return response.status(401).json({ message: 'Token must be a valid token' });
-  }
 
   const homeName = await matchesService.findTeamById(homeTeam);
   const awayName = await matchesService.findTeamById(awayTeam);
