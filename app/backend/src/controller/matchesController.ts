@@ -25,15 +25,14 @@ const getAllMatches = async (request: Request, response: Response) => {
 const addMatch = async (request: Request, response: Response) => {
   const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = request.body;
 
-  const homeName = await matchesService.findTeamNameById(homeTeam);
-  const awayName = await matchesService.findTeamNameById(awayTeam);
   const checkHomeId = await matchesService.findTeamById(homeTeam);
   const checkAwayId = await matchesService.findTeamById(awayTeam);
+
   if (!checkHomeId || !checkAwayId) {
     return response.status(404).json({ message: 'There is no team with such id!' });
   }
 
-  if (homeName === awayName) {
+  if (homeTeam === awayTeam) {
     return response
       .status(422)
       .json({ message: 'It is not possible to create a match with two equal teams' });
@@ -41,7 +40,7 @@ const addMatch = async (request: Request, response: Response) => {
 
   const result = await matchesService.saveMatch(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals);
 
-  return response.json(result);
+  return response.status(201).json(result);
 };
 
 const xablau = () => 'xablau';
