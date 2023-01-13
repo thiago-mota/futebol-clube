@@ -5,4 +5,14 @@ const findAllMatches = async () => {
   return allMatches;
 };
 
-export default { findAllMatches };
+const findAllInProgress = async () => {
+  const allInProgress = await Matchs.findAll({ where: { inProgress: true } });
+  return allInProgress;
+};
+
+const findAllNotInProgress = async () => {
+  const allInProgress = await Matchs.findAll({ where: { inProgress: false } });
+  return allInProgress;
+};
+
+export default { findAllMatches, findAllInProgress, findAllNotInProgress };
