@@ -50,6 +50,11 @@ const findTeamById = async (id: number) => {
   return result?.id;
 };
 
+const updateProgress = async (id: string) => {
+  const result = Matchs.update({ inProgress: false }, { where: { id } });
+  return result;
+};
+
 export default {
   findAllMatches,
   findAllInProgress,
@@ -57,4 +62,5 @@ export default {
   saveMatch,
   findTeamNameById,
   findTeamById,
+  updateProgress,
 };
