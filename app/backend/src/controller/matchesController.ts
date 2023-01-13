@@ -27,6 +27,11 @@ const addMatch = async (request: Request, response: Response) => {
 
   const homeName = await matchesService.findTeamNameById(homeTeam);
   const awayName = await matchesService.findTeamNameById(awayTeam);
+  const checkHomeId = await matchesService.findTeamById(homeTeam);
+  const checkAwayId = await matchesService.findTeamById(awayTeam);
+  if (!checkHomeId || !checkAwayId) {
+    return response.status(404).json({ message: 'There is no team with such id!' });
+  }
 
   if (homeName === awayName) {
     return response
