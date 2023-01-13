@@ -43,6 +43,4 @@ const addMatch = async (request: Request, response: Response) => {
   return response.status(201).json(result);
 };
 
-const xablau = () => 'xablau';
-
-export { getAllMatches, addMatch, xablau };
+export { getAllMatches, addMatch };
