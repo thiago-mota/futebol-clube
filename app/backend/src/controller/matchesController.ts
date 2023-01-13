@@ -6,12 +6,14 @@ const getAllMatches = async (request: Request, response: Response) => {
 
   if (inProgress === 'true') {
     const matchesInprogress = await matchesService.findAllInProgress();
-    return response.json(matchesInprogress);
+    return response
+      .json(matchesInprogress);
   }
 
   if (inProgress === 'false') {
     const matchesInprogress = await matchesService.findAllNotInProgress();
-    return response.json(matchesInprogress);
+    return response
+      .json(matchesInprogress);
   }
 
   const allMatchs = await matchesService.findAllMatches();
@@ -27,6 +29,15 @@ const addMatch = async (request: Request, response: Response) => {
     return response
       .status(401)
       .json({ message: 'Token not found' });
+  }
+
+  const homeName = await matchesService.findTeamById(homeTeam);
+  const awayName = await matchesService.findTeamById(awayTeam);
+
+  if (homeName === awayName) {
+    return response
+      .status(422)
+      .json({ message: 'It is not possible to create a match with two equal teams' });
   }
 
   const result = await matchesService.saveMatch(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals);
