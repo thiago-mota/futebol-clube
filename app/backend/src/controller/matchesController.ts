@@ -51,4 +51,18 @@ const updateMatchProgress = async (request: Request, response: Response) => {
   if (result) response.status(200).json({ message: 'Finished' });
 };
 
-export { getAllMatches, addMatch, updateMatchProgress };
+const updateGameResult = async (request: Request, response: Response) => {
+  const { id } = request.params;
+  const { homeTeamGoals, awayTeamGoals } = request.body;
+
+  console.log(id, homeTeamGoals, awayTeamGoals);
+  console.log(request);
+
+  await matchesService.updateResult(id, homeTeamGoals, awayTeamGoals);
+
+  return response
+    .status(200)
+    .json({ message: 'Score successfully updated' });
+};
+
+export { getAllMatches, addMatch, updateMatchProgress, updateGameResult };
