@@ -55,9 +55,6 @@ const updateGameResult = async (request: Request, response: Response) => {
   const { id } = request.params;
   const { homeTeamGoals, awayTeamGoals } = request.body;
 
-  console.log(id, homeTeamGoals, awayTeamGoals);
-  console.log(request);
-
   await matchesService.updateResult(id, homeTeamGoals, awayTeamGoals);
 
   return response
