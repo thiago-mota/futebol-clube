@@ -55,6 +55,15 @@ const updateProgress = async (id: string) => {
   return result;
 };
 
+const updateResult = async (id: string, homeTeamGoals: number, awayTeamGoals: number) => {
+  const findMatch = await Matchs.findByPk(id);
+
+  if (findMatch?.inProgress === true) {
+    const result = await Matchs.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return result;
+  }
+};
+
 export default {
   findAllMatches,
   findAllInProgress,
@@ -63,4 +72,5 @@ export default {
   findTeamNameById,
   findTeamById,
   updateProgress,
+  updateResult,
 };
