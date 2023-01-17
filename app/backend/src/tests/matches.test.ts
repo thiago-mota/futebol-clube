@@ -99,4 +99,24 @@ describe('Testing /matches endpoint', () => {
 
     expect(response.status).to.be.equal(201);
   })
+
+  it('Status 200 if progress was successfully updated', async () => {
+    const response = await chai.request(app).patch('/matches/42/finish').set('Authorization', token).send({
+      'homeTeam': 8,
+      'awayTeam': 16,
+      'homeTeamGoals': 2,
+      'awayTeamGoals': 2
+    })
+
+    expect(response.status).to.be.equal(200);
+  })
+
+  it('Status 200 if score was successfully updated', async () => {
+    const response = await chai.request(app).patch('/matches/1/').set('Authorization', token).send({
+      'homeTeamGoals': 2,
+      'awayTeamGoals': 2
+    })
+
+    expect(response.status).to.be.equal(200);
+  })
 });
