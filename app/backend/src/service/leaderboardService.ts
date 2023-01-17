@@ -19,7 +19,7 @@ const homeTeamLeaderboard = async () => {
   GROUP BY teams.team_name ORDER BY totalPoints DESC, totalVictories DESC,
    goalsBalance DESC, goalsFavor DESC, goalsOwn DESC`);
 
-  return teamHomeLb;
+  if (teamHomeLb) return teamHomeLb[0];
 };
 
 const awayTeamLeaderboard = async () => {
@@ -40,7 +40,7 @@ const awayTeamLeaderboard = async () => {
   GROUP BY teams.team_name ORDER BY totalPoints DESC, totalVictories DESC
   , goalsBalance DESC, goalsFavor DESC, goalsOwn DESC`);
 
-  return awayTeamLb;
+  if (awayTeamLb) return awayTeamLb[0];
 };
 
 export default { homeTeamLeaderboard, awayTeamLeaderboard };
