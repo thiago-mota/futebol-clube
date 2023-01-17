@@ -1,12 +1,20 @@
 import { Request, Response } from 'express';
 import leaderboardService from '../service/leaderboardService';
 
-const getHomeLeaderboard = async (request: Request, response: Response) => {
-  const lbHome = await leaderboardService.homeTeamLeaderboard();
+const getHomeLeaderboard = async (_request: Request, response: Response) => {
+  const homeTeamLb = await leaderboardService.homeTeamLeaderboard();
 
-  return response.status(200).json(lbHome);
+  return response
+    .status(200)
+    .json(homeTeamLb);
 };
 
-const xablau = () => 'xablau';
+const getAwayLb = async (_request: Request, response: Response) => {
+  const awayTeamLb = await leaderboardService.awayTeamLeaderboard();
 
-export { getHomeLeaderboard, xablau };
+  return response
+    .status(200)
+    .json(awayTeamLb);
+};
+
+export { getHomeLeaderboard, getAwayLb };
